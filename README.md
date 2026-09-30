@@ -35,4 +35,4 @@ Por defecto **no muestran la cédula ni la dirección exacta** (solo el municipi
 
 ## Publicar
 
-En GitHub: *Settings → Pages → Deploy from a branch → `main` / `(root)`*. La dirección queda en `https://<usuario>.github.io/nuvora/`. Si el nombre del repositorio o el dominio cambian, actualiza las direcciones absolutas de `index.html` (canonical, Open Graph, JSON-LD), `sitemap.xml`, `robots.txt`, las plantillas del generador y la ruta base de `404.html`.
+En GitHub: *Settings → Pages → Deploy from a branch → `main` / `(root)`*. La dirección queda en `https://<usuario>.github.io/nuvora-web/`. Si el nombre del repositorio o el dominio cambian, actualiza las direcciones absolutas de `index.html` (canonical, Open Graph, JSON-LD), `sitemap.xml`, `robots.txt`, las plantillas del generador y la ruta base de `404.html`.

@@ -60,7 +60,7 @@ const plantilla = ({ titulo, descripcion, archivo, cuerpo, nota }) => `<!doctype
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${titulo} | Nuvora</title>
   <meta name="description" content="${descripcion}">
-  <link rel="canonical" href="https://juanesroldan22.github.io/nuvora/${archivo}">
+  <link rel="canonical" href="https://juanesroldan22.github.io/nuvora-web/${archivo}">
   <meta name="theme-color" content="#f4f5f6" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0f1114" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
