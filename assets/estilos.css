@@ -1,0 +1,247 @@
+/* Nuvora: sitio de presentacion. HTML y CSS nativos, sin JavaScript.
+   Tema claro y oscuro segun el sistema. Un solo acento (naranja de la marca). Esquinas: botones 10px, superficies e imagenes 14px. */
+
+@font-face {
+  font-family: "Geist";
+  src: url("fonts/geist-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Geist";
+  src: url("fonts/geist-latin-ext-wght-normal.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  --fondo: #f4f5f6;
+  --superficie: #ffffff;
+  --superficie-suave: #eceef0;
+  --tinta: #16191c;
+  --suave: #4a5058;
+  --linea: #d9dce0;
+  --acento: #c24623;          /* texto blanco sobre este color: contraste 5:1 */
+  --acento-texto: #b23f1e;    /* acento como texto sobre el fondo */
+  --acento-suave: #fbe9e2;
+  --marca: #d9552f;           /* solo para el logo, igual que en el producto */
+  --oscuro: #1b1f24;
+  --oscuro-texto: #eceef0;
+  --oscuro-suave: #a9afb6;
+  --sombra: 0 30px 60px -28px rgba(22, 25, 28, 0.35), 0 2px 6px rgba(22, 25, 28, 0.06);
+  --radio-boton: 10px;
+  --radio: 14px;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #0f1114;
+    --superficie: #171a1e;
+    --superficie-suave: #1e2227;
+    --tinta: #eceef0;
+    --suave: #a9afb6;
+    --linea: #2a2f35;
+    --acento: #c24623;
+    --acento-texto: #f0784f;
+    --acento-suave: #2a1a14;
+    --oscuro: #22272e;
+    --oscuro-texto: #eceef0;
+    --oscuro-suave: #a9afb6;
+    --sombra: 0 30px 60px -28px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+
+.contenedor { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: 24px; }
+.solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.saltar { position: absolute; left: 12px; top: -60px; background: var(--tinta); color: var(--fondo); padding: 10px 16px; border-radius: var(--radio-boton); z-index: 100; }
+.saltar:focus { top: 12px; }
+
+:focus-visible { outline: 3px solid var(--acento-texto); outline-offset: 3px; border-radius: 6px; }
+
+/* Iconos Phosphor (MIT) como mascara: toman el color del texto */
+.icono { display: inline-block; flex: none; width: 1.25em; height: 1.25em; background: currentColor; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; }
+.i-bell { -webkit-mask-image: url("icons/bell-ringing.svg"); mask-image: url("icons/bell-ringing.svg"); }
+.i-xls { -webkit-mask-image: url("icons/file-xls.svg"); mask-image: url("icons/file-xls.svg"); }
+.i-check { -webkit-mask-image: url("icons/check.svg"); mask-image: url("icons/check.svg"); }
+.i-caret { -webkit-mask-image: url("icons/caret-down.svg"); mask-image: url("icons/caret-down.svg"); }
+.i-oficina { -webkit-mask-image: url("icons/desktop-tower.svg"); mask-image: url("icons/desktop-tower.svg"); }
+.i-nube { -webkit-mask-image: url("icons/cloud.svg"); mask-image: url("icons/cloud.svg"); }
+.i-escudo { -webkit-mask-image: url("icons/shield-check.svg"); mask-image: url("icons/shield-check.svg"); }
+
+/* Botones */
+.boton {
+  display: inline-flex; align-items: center; gap: 10px; white-space: nowrap;
+  padding: 14px 22px; border-radius: var(--radio-boton); border: 1.5px solid transparent;
+  font: inherit; font-weight: 600; font-size: 1rem; line-height: 1; text-decoration: none; cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+.boton:active { transform: translateY(1px) scale(0.99); }
+.boton-primario { background: var(--acento); color: #ffffff; }
+.boton-primario:hover { background: #a93a19; }
+.boton-secundario { background: transparent; color: var(--tinta); border-color: var(--linea); }
+.boton-secundario:hover { border-color: var(--tinta); }
+.boton-chico { padding: 11px 16px; font-size: 0.9375rem; }
+
+/* Navegacion: una sola linea, 68px */
+.nav { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--fondo) 92%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--linea); }
+.nav-interior { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 68px; }
+.logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 650; font-size: 1.25rem; letter-spacing: -0.02em; }
+.logo-marca { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; background: var(--marca); color: #fff; font-size: 1.15rem; font-weight: 700; }
+.nav-enlaces { display: flex; align-items: center; gap: 28px; }
+.nav-enlaces a:not(.boton) { text-decoration: none; color: var(--suave); font-size: 0.9375rem; font-weight: 500; }
+.nav-enlaces a:not(.boton):hover { color: var(--tinta); }
+
+/* Hero: mitad texto, mitad captura real del producto */
+.hero { padding-block: 56px 72px; }
+.hero-rejilla { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 56px; align-items: center; }
+.hero h1 { font-size: clamp(2.3rem, 3.9vw, 3.1rem); }
+.hero-texto p { margin-top: 22px; max-width: 34ch; font-size: 1.25rem; color: var(--suave); line-height: 1.5; }
+.hero-acciones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.captura { border-radius: var(--radio); border: 1px solid var(--linea); box-shadow: var(--sombra); overflow: hidden; background: var(--superficie); }
+.captura img { width: 100%; }
+
+/* Secciones */
+.seccion { padding-block: 96px; }
+.seccion h2 { font-size: clamp(1.9rem, 3.4vw, 2.75rem); max-width: 20ch; }
+.seccion-intro { margin-top: 16px; max-width: 60ch; color: var(--suave); }
+
+/* Del presupuesto al cobro: cuatro momentos sobre una linea */
+.recorrido { margin-top: 56px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 32px; padding: 0; list-style: none; }
+.recorrido li { position: relative; padding-top: 28px; border-top: 2px solid var(--linea); }
+.recorrido li::before { content: ""; position: absolute; top: -2px; left: 0; width: 44px; height: 2px; background: var(--acento); }
+.recorrido h3 { font-size: 1.5rem; }
+.recorrido p { margin-top: 10px; color: var(--suave); font-size: 1rem; }
+
+/* Funciones: rejilla con ritmo, 5 celdas exactas */
+.rejilla-funciones { margin-top: 56px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.celda { display: flex; flex-direction: column; border-radius: var(--radio); background: var(--superficie); border: 1px solid var(--linea); overflow: hidden; }
+.celda-texto { padding: 28px 28px 24px; }
+.celda h3 { font-size: 1.4rem; }
+.celda p { margin-top: 10px; color: var(--suave); font-size: 1rem; }
+.celda-imagen { margin-top: auto; border-top: 1px solid var(--linea); }
+.celda-imagen img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+.celda-ancha { grid-column: span 2; }
+.celda-ancha .celda-imagen img { aspect-ratio: 16 / 7; }
+.celda-alta .celda-imagen img { aspect-ratio: 4 / 3; }
+.celdas-apiladas { display: grid; grid-template-rows: 1fr 1fr; gap: 20px; }
+.celdas-apiladas .celda-texto { padding: 24px 26px; }
+.celdas-apiladas .icono { width: 30px; height: 30px; margin-bottom: 14px; }
+.celda-acento { background: var(--acento); border-color: var(--acento); color: #fff; }
+.celda-acento p { color: rgba(255, 255, 255, 0.92); }
+.celda-oscura { background: var(--oscuro); border-color: var(--oscuro); color: var(--oscuro-texto); }
+.celda-oscura p { color: var(--oscuro-suave); }
+.celda .icono { width: 34px; height: 34px; margin-bottom: 22px; }
+
+/* Tambien incluye: dos columnas agrupadas */
+.incluye { margin-top: 72px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 64px; }
+.incluye h3 { grid-column: 1 / -1; font-size: 1.5rem; margin-bottom: 8px; }
+.incluye ul { list-style: none; margin: 0; padding: 0; }
+.incluye li { display: flex; gap: 14px; padding-block: 16px; color: var(--suave); }
+.incluye li strong { display: block; color: var(--tinta); font-weight: 600; }
+.incluye .icono { margin-top: 3px; color: var(--acento-texto); }
+
+/* Celular */
+.celular-rejilla { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.7fr); gap: 72px; align-items: center; }
+.celular-rejilla p { margin-top: 18px; max-width: 46ch; color: var(--suave); }
+.marco-celular { justify-self: center; width: min(100%, 300px); padding: 10px; border-radius: 36px; background: var(--oscuro); box-shadow: var(--sombra); }
+.marco-celular img { border-radius: 27px; width: 100%; }
+
+/* Como se contrata */
+.contratar { margin-top: 48px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.opcion { padding: 34px; border-radius: var(--radio); background: var(--superficie); border: 1px solid var(--linea); }
+.opcion h3 { font-size: 1.6rem; display: flex; align-items: center; gap: 14px; }
+.opcion > p { margin-top: 14px; color: var(--suave); }
+.opcion ul { margin: 22px 0 0; padding: 0; list-style: none; }
+.opcion li { display: flex; gap: 12px; padding-block: 8px; }
+.opcion li .icono { margin-top: 3px; color: var(--acento-texto); }
+.opcion-futura { background: transparent; border-style: dashed; }
+.opcion-futura h3, .opcion-futura > p { color: var(--suave); }
+.etiqueta { display: inline-block; padding: 4px 12px; border-radius: 999px; background: var(--superficie-suave); color: var(--suave); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0; }
+
+/* Aviso: lo que Nuvora no es */
+.aviso { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 24px; padding: 34px 36px; border-radius: var(--radio); background: var(--acento-suave); border: 1px solid color-mix(in srgb, var(--acento) 35%, transparent); }
+.aviso .icono { width: 34px; height: 34px; color: var(--acento-texto); margin-top: 4px; }
+.aviso h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); max-width: none; }
+.aviso p { margin-top: 12px; max-width: 70ch; }
+
+/* Preguntas */
+.preguntas { margin-top: 40px; max-width: 820px; }
+.preguntas details { border-top: 1px solid var(--linea); }
+.preguntas details:last-child { border-bottom: 1px solid var(--linea); }
+.preguntas summary { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-block: 22px; cursor: pointer; font-size: 1.15rem; font-weight: 550; list-style: none; }
+.preguntas summary::-webkit-details-marker { display: none; }
+.preguntas summary .icono { transition: transform 0.2s ease; color: var(--suave); }
+.preguntas details[open] summary .icono { transform: rotate(180deg); }
+.preguntas details p { padding-bottom: 24px; max-width: 68ch; color: var(--suave); }
+
+/* Contacto final */
+.contacto { background: var(--oscuro); color: var(--oscuro-texto); border-radius: var(--radio); padding: clamp(36px, 6vw, 72px); display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+.contacto h2 { font-size: clamp(2rem, 3.8vw, 3rem); max-width: 16ch; }
+.contacto p { margin-top: 16px; color: var(--oscuro-suave); max-width: 46ch; }
+.contacto-lado { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+.contacto-lado a.correo { color: var(--oscuro-texto); text-decoration: underline; text-underline-offset: 4px; }
+
+/* Pie */
+.pie { padding-block: 56px 48px; margin-top: 96px; border-top: 1px solid var(--linea); color: var(--suave); font-size: 0.9375rem; }
+.pie-rejilla { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr)); gap: 40px; }
+.pie h2 { font-size: 0.9375rem; letter-spacing: 0; font-weight: 600; color: var(--tinta); margin-bottom: 12px; max-width: none; }
+.pie ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.pie a { text-decoration: none; }
+.pie a:hover { color: var(--tinta); text-decoration: underline; }
+.pie-legal { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--linea); font-size: 0.875rem; }
+
+/* Paginas legales */
+.legal { padding-block: 64px 24px; max-width: 760px; }
+.legal h1 { font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: 8px; }
+.legal h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 8px; letter-spacing: -0.02em; }
+.legal p { margin-top: 12px; color: var(--suave); }
+.legal ul { margin: 12px 0; padding-left: 22px; color: var(--suave); }
+.legal li { margin-top: 6px; }
+.legal strong { color: var(--tinta); }
+.legal a { color: var(--acento-texto); }
+
+/* Adaptacion: en pantallas angostas todo pasa a una columna */
+@media (max-width: 1000px) {
+  .hero-rejilla, .celular-rejilla, .contacto { grid-template-columns: minmax(0, 1fr); }
+  .hero-rejilla { gap: 44px; }
+  .hero-texto p { max-width: 42ch; }
+  .rejilla-funciones { grid-template-columns: minmax(0, 1fr); }
+  .celda-ancha { grid-column: auto; }
+  .recorrido { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 32px; }
+  .pie-rejilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pie-rejilla > :first-child { grid-column: 1 / -1; }
+}
+@media (max-width: 720px) {
+  body { font-size: 1rem; }
+  .seccion { padding-block: 64px; }
+  .hero { padding-block: 36px 56px; }
+  .nav-enlaces a:not(.boton) { display: none; }
+  .contratar, .incluye { grid-template-columns: minmax(0, 1fr); }
+  .recorrido { grid-template-columns: minmax(0, 1fr); }
+  .aviso { grid-template-columns: minmax(0, 1fr); padding: 26px; gap: 14px; }
+  .celular-rejilla { gap: 40px; }
+  .boton { padding: 13px 18px; }
+  .hero-acciones .boton { flex: 1 1 auto; justify-content: center; }
+}
