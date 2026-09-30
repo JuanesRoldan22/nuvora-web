@@ -91,14 +91,12 @@ ${cuerpo}
 </html>
 `;
 
-const notaDeTerminos = `<p style="margin-bottom:28px;padding:16px 20px;border-radius:14px;background:var(--superficie-suave)"><strong>Instalación local.</strong> Cuando Nuvora se instala en el equipo del cliente, además de estos términos rige el acuerdo de licencia de instalación local que se firma con el proveedor, y prevalece en lo que se oponga.</p>`;
-
 writeFileSync(join(raiz, "terminos.html"), plantilla({
   titulo: "Términos y condiciones",
   descripcion: "Términos y condiciones de uso de Nuvora.",
   archivo: "terminos.html",
   cuerpo: aHtml(leerTexto("terminos.ts", "terminos")),
-  nota: notaDeTerminos,
+  nota: "",
 }));
 writeFileSync(join(raiz, "privacidad.html"), plantilla({
   titulo: "Política de privacidad",
